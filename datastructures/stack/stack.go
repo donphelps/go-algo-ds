@@ -38,7 +38,7 @@ func (s *Stack) Push(value int) {
 }
 
 // String returns a stack represented as a string.
-func (s *Stack) String() string { //[]
+func (s *Stack) String() string {
 	c := strcat.StringConcatenator{}
 
 	for _, e := range s.elements {

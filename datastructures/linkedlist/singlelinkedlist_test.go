@@ -5,7 +5,17 @@ import (
 	"testing"
 )
 
-func TestInsertHead(t *testing.T) {
+func sampleSingleLinkedList() linkedlist.SingleLinkedList {
+	var s linkedlist.SingleLinkedList
+
+	for i := 1; i <= 5; i++ {
+		s.Insert(i)
+	}
+
+	return s
+}
+
+func TestSingleInsertHead(t *testing.T) {
 	var s linkedlist.SingleLinkedList
 
 	s.InsertHead(1)
@@ -14,7 +24,7 @@ func TestInsertHead(t *testing.T) {
 	}
 }
 
-func TestInsert(t *testing.T) {
+func TestSingleInsert(t *testing.T) {
 	var s linkedlist.SingleLinkedList
 
 	s.Insert(3)
@@ -26,21 +36,16 @@ func TestInsert(t *testing.T) {
 	}
 }
 
-func TestCount(t *testing.T) {
-	var s linkedlist.SingleLinkedList
-
-	s.Insert(3)
-	s.Insert(4)
-	s.Insert(5)
-	s.InsertHead(2)
+func TestSingleCount(t *testing.T) {
+	s := sampleSingleLinkedList()
 
 	c := s.Count()
-	if c != 4 {
-		t.Errorf("Count fail. Expected 4, got %v", c)
+	if c != 5 {
+		t.Errorf("Count fail. Expected 5, got %v", c)
 	}
 }
 
-func TestClear(t *testing.T) {
+func TestSingleClear(t *testing.T) {
 	var s linkedlist.SingleLinkedList
 
 	s.InsertHead(1)
@@ -51,13 +56,8 @@ func TestClear(t *testing.T) {
 	}
 }
 
-func TestSearch(t *testing.T) {
-	var s linkedlist.SingleLinkedList
-
-	s.Insert(3)
-	s.Insert(4)
-	s.Insert(5)
-	s.InsertHead(2)
+func TestSingleSearch(t *testing.T) {
+	s := sampleSingleLinkedList()
 
 	three := s.Search(3)
 	if three == nil {
@@ -70,19 +70,14 @@ func TestSearch(t *testing.T) {
 	}
 }
 
-func TestDelete(t *testing.T) {
-	var s linkedlist.SingleLinkedList
+func TestSingleDelete(t *testing.T) {
+	s := sampleSingleLinkedList()
 
-	s.Insert(1)
-	s.Insert(2)
-	s.Insert(3)
-	s.Insert(4)
-	s.Insert(5)
 	s.Delete(1) // del head
 	s.Delete(3) // del mid
 	s.Delete(5) // del tail
-	if s.String() != "2 4 " {
-		t.Errorf("Delete fail. Expected '2 4 ', got '%s'", s.String())
+	if s.Count() != 2 {
+		t.Errorf("Delete fail. Expected count of 2, got '%s'", s.String())
 	}
 
 	s.Delete(2)
