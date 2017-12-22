@@ -52,7 +52,6 @@ func (d *DoubleLinkedList) InsertHead(i int) {
 		return
 	}
 
-	fmt.Println("particular code reached.")
 	n.Next = d.Head
 	d.Head = n
 }

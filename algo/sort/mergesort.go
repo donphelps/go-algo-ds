@@ -1,10 +1,8 @@
 package sort
 
-import "fmt"
-
 /*
 Computational: O(n log(n))
-Additional memory use: O(n)
+Memory: O(n)
 */
 
 // MergeSort initiates a Mergesort on the supplied int slice and returns a sorted int slice.
@@ -38,6 +36,5 @@ func merge(left, right []int) []int {
 		}
 	}
 
-	fmt.Println(slice)
 	return slice
 }
