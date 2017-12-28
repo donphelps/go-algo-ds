@@ -1,11 +1,11 @@
 package stack
 
 import (
-	"go-algo-ds/strcat"
+	"bytes"
 	"strconv"
 )
 
-// Stack implements the stack datastructure for ints.
+// Stack implements the stack data structure for ints.
 type Stack struct {
 	elements []int
 }
@@ -13,6 +13,11 @@ type Stack struct {
 // New creates a new Stack.
 func New() *Stack {
 	return &Stack{}
+}
+
+// Clear removes all elements from the stack.
+func (s *Stack) Clear() {
+	s.elements = []int{}
 }
 
 // Len returns the number of elements in a stack.
@@ -39,11 +44,11 @@ func (s *Stack) Push(value int) {
 
 // String returns a stack represented as a string.
 func (s *Stack) String() string {
-	c := strcat.StringConcatenator{}
+	var buffer bytes.Buffer
 
 	for _, e := range s.elements {
-		c.AppendString(strconv.Itoa(e) + " ")
+		buffer.WriteString(strconv.Itoa(e) + " ")
 	}
 
-	return c.String()
+	return buffer.String()
 }

@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-// Queue implements the queue datastructure for ints.
+// Queue implements the queue data structure for ints.
 type Queue struct {
 	elements []int
 }

@@ -19,6 +19,15 @@ func newTestStack(length int) *stack.Stack {
 	return s
 }
 
+func TestClear(t *testing.T) {
+	s := newTestStack(3)
+
+	s.Clear()
+	if s.Len() != 0 {
+		t.Errorf("Stack clear fail. Expected len %v, got %v.", 0, s.Len())
+	}
+}
+
 func TestPeek(t *testing.T) {
 	s := newTestStack(3)
 
