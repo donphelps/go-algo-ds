@@ -1,6 +1,7 @@
-package sort
+package sort_test
 
 import (
+	"go-algo-ds/algo/sort"
 	"math/rand"
 	"testing"
 	"time"
@@ -22,7 +23,7 @@ func TestMergeSort(t *testing.T) {
 	goodSort := true
 	i := randomUnsortedInts(100)
 
-	sorted := MergeSort(i)
+	sorted := sort.MergeSort(i)
 
 	if len(sorted) > 2 {
 		for d := 0; d <= len(sorted)-2; d++ {
