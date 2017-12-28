@@ -11,7 +11,7 @@ type SingleNode struct {
 	Next  *SingleNode
 }
 
-// SingleLinkedList implements the Single Linked List datastructure for ints.
+// SingleLinkedList implements the Single Linked List data structure for ints.
 type SingleLinkedList struct {
 	Head *SingleNode
 	Tail *SingleNode

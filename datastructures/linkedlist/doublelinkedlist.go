@@ -12,7 +12,7 @@ type DoubleNode struct {
 	Next     *DoubleNode
 }
 
-// DoubleLinkedList implements the Double Linked List datastructure for ints.
+// DoubleLinkedList implements the Double Linked List data structure for ints.
 type DoubleLinkedList struct {
 	Head *DoubleNode
 	Tail *DoubleNode
