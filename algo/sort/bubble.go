@@ -3,7 +3,7 @@ package sort
 //  Time complexity: O(n^2)
 // Space complexity: no additional
 
-// BubbleSort initiates a bubble sort on the supported int slice.
+// BubbleSort initiates a bubble sort on the supplied int slice.
 func BubbleSort(ints []int) {
 	var size = len(ints)
 
@@ -20,7 +20,7 @@ func BubbleSort(ints []int) {
 	}
 }
 
-// BubbleSortOptimized initiates an optimized bubble sort on the supported int slice.
+// BubbleSortOptimized initiates an optimized bubble sort on the supplied int slice.
 func BubbleSortOptimized(ints []int) {
 	// Don't compare numbers that are already in their final position.
 	// Stop sorting if our list is already sorted.
