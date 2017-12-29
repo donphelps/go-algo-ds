@@ -6,12 +6,12 @@ import (
 	"testing"
 )
 
-func TestInsertion(t *testing.T) {
+func TestShellSort(t *testing.T) {
 	var i = randomUnsortedInts(1000)
 
-	sort.InsertionSort(i)
+	sort.ShellSort(i)
 
 	if !gosort.IntsAreSorted(i) {
-		t.Errorf("InsertionSort result is not sorted. %v", i)
+		t.Errorf("ShellSort result is not sorted. %v", i)
 	}
 }

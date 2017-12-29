@@ -2,37 +2,26 @@ package sort_test
 
 import (
 	"go-algo-ds/algo/sort"
+	gosort "sort"
 	"testing"
 )
 
 func TestBubble(t *testing.T) {
 	var i = randomUnsortedInts(1000)
-	var d int
 
 	sort.BubbleSort(i)
 
-	if len(i) > 2 {
-		for d = 0; d <= len(i)-2; d++ {
-			if i[d] > i[d+1] {
-				t.Errorf("BubbleSort result had adjacent values: (%v, %v)", i[d], i[d+1])
-				break
-			}
-		}
+	if !gosort.IntsAreSorted(i) {
+		t.Errorf("BubbleSort result is not sorted. %v", i)
 	}
 }
 
-func TestBubblesortOptimized(t *testing.T) {
+func TestBubbleSortOptimized(t *testing.T) {
 	var i = randomUnsortedInts(1000)
-	var d int
 
 	sort.BubbleSortOptimized(i)
 
-	if len(i) > 2 {
-		for d = 0; d <= len(i)-2; d++ {
-			if i[d] > i[d+1] {
-				t.Errorf("BubbleSortOptimized result had adjacent values: (%v, %v)", i[d], i[d+1])
-				break
-			}
-		}
+	if !gosort.IntsAreSorted(i) {
+		t.Errorf("BubbleSortOptimized result is not sorted. %v", i)
 	}
 }
