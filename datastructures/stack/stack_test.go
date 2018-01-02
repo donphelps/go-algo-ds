@@ -6,11 +6,11 @@ import (
 )
 
 func newTestStack(length int) *stack.Stack {
-	if length <= 0 {
+	s := stack.New()
+
+	if length < 0 {
 		return nil
 	}
-
-	s := stack.New()
 
 	for i := 1; i <= length; i++ {
 		s.Push(i)
@@ -64,5 +64,24 @@ func TestString(t *testing.T) {
 	str := s.String()
 	if str != "1 2 3 " {
 		t.Errorf("Stack string fail. Expected '%v', got '%v'.", "1 2 3 ", str)
+	}
+}
+
+func TestStackContains(t *testing.T) {
+	s := newTestStack(0)
+
+	s.Push(42)
+	s.Push(64)
+	s.Push(11)
+	s.Push(22)
+
+	c := s.Contains(11)
+	if !c {
+		t.Error("Stack Contains(11) fail. Expected true, got false.", true, false)
+	}
+
+	c = s.Contains(99)
+	if c {
+		t.Error("Stack Contains(99) fail. Expected false, got true.")
 	}
 }

@@ -5,11 +5,22 @@ import (
 	"testing"
 )
 
-func TestEnqueue(t *testing.T) {
-	var q queue.Queue
+func newTestQueue(length int) *queue.Queue {
+	q := queue.New()
 
-	q.Enqueue(1)
-	q.Enqueue(2)
+	if length < 0 {
+		return nil
+	}
+
+	for i := 1; i <= length; i++ {
+		q.Enqueue(i)
+	}
+
+	return q
+}
+
+func TestEnqueue(t *testing.T) {
+	q := newTestQueue(2)
 	l := q.Len()
 	if l != 2 {
 		t.Errorf("Queue Len fail. Expected %v, got %v.", 2, l)
@@ -17,11 +28,7 @@ func TestEnqueue(t *testing.T) {
 }
 
 func TestQueueString(t *testing.T) {
-	var q queue.Queue
-
-	q.Enqueue(1)
-	q.Enqueue(2)
-
+	q := newTestQueue(2)
 	s := q.String()
 	if s != "1 2 " {
 		t.Errorf("Queue String fail. Expected '%v', got '%v'.", "1 2 ", s)
@@ -29,11 +36,7 @@ func TestQueueString(t *testing.T) {
 }
 
 func TestQueueClear(t *testing.T) {
-	var q queue.Queue
-
-	q.Enqueue(1)
-	q.Enqueue(2)
-
+	q := newTestQueue(2)
 	q.Clear()
 	l := q.Len()
 	if l != 0 {
@@ -42,7 +45,7 @@ func TestQueueClear(t *testing.T) {
 }
 
 func TestQueuePeek(t *testing.T) {
-	var q queue.Queue
+	q := newTestQueue(0)
 
 	q.Enqueue(42)
 	q.Enqueue(64)
@@ -53,7 +56,7 @@ func TestQueuePeek(t *testing.T) {
 }
 
 func TestQueueDequeue(t *testing.T) {
-	var q queue.Queue
+	q := newTestQueue(0)
 
 	q.Enqueue(42)
 	q.Enqueue(64)
@@ -65,7 +68,7 @@ func TestQueueDequeue(t *testing.T) {
 }
 
 func TestQueueContains(t *testing.T) {
-	var q queue.Queue
+	q := newTestQueue(0)
 
 	q.Enqueue(42)
 	q.Enqueue(64)

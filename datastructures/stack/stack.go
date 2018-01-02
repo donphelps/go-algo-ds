@@ -10,7 +10,7 @@ type Stack struct {
 	elements []int
 }
 
-// New creates a new Stack.
+// New returns a pointer to a new Stack struct.
 func New() *Stack {
 	return &Stack{}
 }
@@ -40,6 +40,17 @@ func (s *Stack) Pop() int {
 // Push adds an element to the top of the stack.
 func (s *Stack) Push(value int) {
 	s.elements = append(s.elements, value)
+}
+
+// Contains checks if the element is in the stack.
+func (s *Stack) Contains(x int) bool {
+	for _, e := range s.elements {
+		if e == x {
+			return true
+		}
+	}
+
+	return false
 }
 
 // String returns a stack represented as a string.
