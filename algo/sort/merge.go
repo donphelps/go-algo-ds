@@ -1,5 +1,7 @@
 package sort
 
+import "sync"
+
 //  Time complexity: O(n log(n))
 // Space complexity: O(n)
 
@@ -35,4 +37,49 @@ func merge(left, right []int) []int {
 	}
 
 	return merged
+}
+
+var sem = make(chan struct{}, 50)
+
+// MergeSortMulti initiates a merge sort that uses goroutines on the supplied slice and returns a sorted int slice.
+// From https://medium.com/@_orcaman/when-too-much-concurrency-slows-you-down-golang-9c144ca305a
+func MergeSortMulti(ints []int) []int {
+	if len(ints) <= 1 {
+		return ints
+	}
+
+	n := len(ints) / 2
+
+	wg := sync.WaitGroup{}
+	wg.Add(2)
+
+	var l []int
+	var r []int
+
+	select {
+	case sem <- struct{}{}:
+		go func() {
+			l = MergeSortMulti(ints[:n])
+			<-sem
+			wg.Done()
+		}()
+	default:
+		l = MergeSort(ints[:n])
+		wg.Done()
+	}
+
+	select {
+	case sem <- struct{}{}:
+		go func() {
+			r = MergeSortMulti(ints[n:])
+			<-sem
+			wg.Done()
+		}()
+	default:
+		r = MergeSort(ints[n:])
+		wg.Done()
+	}
+
+	wg.Wait()
+	return merge(l, r)
 }
