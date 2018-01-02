@@ -15,3 +15,13 @@ func TestMergeSort(t *testing.T) {
 		t.Errorf("MergeSort result is not sorted. %v", i)
 	}
 }
+
+func TestMergeSortMulti(t *testing.T) {
+	var i = randomUnsortedInts(1000)
+
+	sorted := sort.MergeSortMulti(i)
+
+	if !gosort.IntsAreSorted(sorted) {
+		t.Errorf("MergeSort result is not sorted. %v", i)
+	}
+}
