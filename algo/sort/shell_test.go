@@ -15,3 +15,13 @@ func TestShellSort(t *testing.T) {
 		t.Errorf("ShellSort result is not sorted. %v", i)
 	}
 }
+
+func TestShellSortCiura(t *testing.T) {
+	var i = randomUnsortedInts(1000)
+
+	sort.ShellSortCiura(i)
+
+	if !gosort.IntsAreSorted(i) {
+		t.Errorf("ShellSort result is not sorted. %v", i)
+	}
+}
