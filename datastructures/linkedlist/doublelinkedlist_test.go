@@ -91,7 +91,7 @@ func TestDoubleSearchReverse(t *testing.T) {
 	}
 }
 
-func TestDoubleDelete(t *testing.T) { //[] break out into individual tests
+func TestDoubleDelete(t *testing.T) {
 	d := sampleDoubleLinkedList()
 
 	d.Delete(1) // del head
