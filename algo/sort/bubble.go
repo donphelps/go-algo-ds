@@ -1,9 +1,8 @@
 package sort
 
-//  Time complexity: O(n^2)
-// Space complexity: no additional
-
 // BubbleSort initiates a bubble sort on the supplied int slice.
+// Time complexity: O(n^2)
+// Space complexity: no additional
 func BubbleSort(ints []int) {
 	var size = len(ints)
 

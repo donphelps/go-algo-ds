@@ -1,7 +1,19 @@
 package sort
 
-//  Time complexity: O(n log(n))
+// HeapSort initiates a heap sort on the supplied int slice and returns a sorted int slice.
+// Time complexity: O(n log(n))
 // Space complexity: no additional
+func HeapSort(slice []int) []int {
+	h := buildMaxHeap(slice)
+
+	for i := len(h.slice) - 1; i >= 1; i-- {
+		h.slice[0], h.slice[i] = h.slice[i], h.slice[0]
+		h.heapSize--
+		h.maxHeapify(0)
+	}
+
+	return h.slice
+}
 
 type maxHeap struct {
 	slice    []int
@@ -35,17 +47,4 @@ func (h maxHeap) maxHeapify(i int) {
 
 func (h maxHeap) size() int {
 	return h.heapSize
-}
-
-// HeapSort initiates a heap sort on the supplied int slice and returns a sorted int slice.
-func HeapSort(slice []int) []int {
-	h := buildMaxHeap(slice)
-
-	for i := len(h.slice) - 1; i >= 1; i-- {
-		h.slice[0], h.slice[i] = h.slice[i], h.slice[0]
-		h.heapSize--
-		h.maxHeapify(0)
-	}
-
-	return h.slice
 }

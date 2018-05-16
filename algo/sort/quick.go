@@ -1,6 +1,6 @@
 package sort
 
-import "math/rand"
+import "math/rand" //[] efficiency?
 
 // QuickSort initiates a quicksort on the supplied int slice and returns a sorted int slice.
 // From https://gist.github.com/vderyagin/4161347

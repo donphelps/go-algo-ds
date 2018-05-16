@@ -1,9 +1,9 @@
 package sort
 
-//  Time complexity: O(n^2)
-// Space complexity: no additional
-
 // InsertionSort implements an insertion sort on the supplied int slice.
+//
+// Time complexity: O(n^2)
+// Space complexity: no additional
 func InsertionSort(ints []int) {
 	var size = len(ints)
 	for i := 1; i < size; i++ {
