@@ -30,7 +30,7 @@ func main() {
 }
 
 func testSorts(qty int) {
-	fmt.Printf("Sample contains %v elements ranging in values +/- %v\n", formatInt(sampleQty), formatInt(sampleSize))
+	fmt.Printf("Sample contains %v integer elements ranging in values +/- %v\n", formatInt(sampleQty), formatInt(sampleSize))
 
 	start := time.Now()
 	b := randomUnsortedInts(qty)
@@ -79,7 +79,7 @@ func testSorts(qty int) {
 	fmt.Printf("  merge complete in %v\n", elapsed)
 	// ------------
 	start = time.Now()
-	mm = sort.MergeSort(mm)
+	mm = sort.MergeSortMulti(mm)
 	elapsed = time.Since(start)
 	fmt.Printf("  goroutine merge complete in %v\n", elapsed)
 	// ------------
