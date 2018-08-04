@@ -7,7 +7,7 @@ import (
 )
 
 func TestBubble(t *testing.T) {
-	var i = randomUnsortedInts(1000)
+	var i = randomUnsortedInts(1000, 99999)
 
 	sort.BubbleSort(i)
 
@@ -17,7 +17,7 @@ func TestBubble(t *testing.T) {
 }
 
 func TestBubbleSortOptimized(t *testing.T) {
-	var i = randomUnsortedInts(1000)
+	var i = randomUnsortedInts(1000, 99999)
 
 	sort.BubbleSortOptimized(i)
 

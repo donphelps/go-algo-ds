@@ -7,7 +7,7 @@ import (
 )
 
 func TestMergeSort(t *testing.T) {
-	var i = randomUnsortedInts(1000)
+	var i = randomUnsortedInts(1000, 99999)
 
 	sorted := sort.MergeSort(i)
 
@@ -17,7 +17,7 @@ func TestMergeSort(t *testing.T) {
 }
 
 func TestMergeSortMulti(t *testing.T) {
-	var i = randomUnsortedInts(1000)
+	var i = randomUnsortedInts(1000, 99999)
 
 	sorted := sort.MergeSortMulti(i)
 

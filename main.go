@@ -46,6 +46,8 @@ func testSorts(qty int) {
 	elapsed := time.Since(start)
 	fmt.Printf("Samples generated in %v\n\n", elapsed)
 
+	// O(n^2) examples are too slow to bother with.
+
 	/*fmt.Println("O(n^2):")
 	start = time.Now()
 	sort.BubbleSort(b)

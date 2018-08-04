@@ -7,7 +7,7 @@ import (
 )
 
 func TestInsertion(t *testing.T) {
-	var i = randomUnsortedInts(1000)
+	var i = randomUnsortedInts(1000, 99999)
 
 	sort.InsertionSort(i)
 

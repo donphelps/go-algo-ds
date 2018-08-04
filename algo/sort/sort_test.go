@@ -5,13 +5,13 @@ import (
 	"time"
 )
 
-func randomUnsortedInts(count int) []int {
+func randomUnsortedInts(count, max int) []int {
 	slice := make([]int, count, count)
 
 	rand.Seed(time.Now().UnixNano())
 
 	for i := 0; i < count; i++ {
-		slice[i] = rand.Intn(99999) - rand.Intn(99999)
+		slice[i] = rand.Intn(max) - rand.Intn(max)
 	}
 
 	return slice
