@@ -1,9 +1,12 @@
 package sort
 
-import "math/rand" //[] efficiency?
+import "math/rand"
 
 // QuickSort initiates a quicksort on the supplied int slice and returns a sorted int slice.
 // From https://gist.github.com/vderyagin/4161347
+//
+// Time complexity: O(n^2)
+// Space complexity: O(n)
 func QuickSort(slice []int) []int {
 	length := len(slice)
 

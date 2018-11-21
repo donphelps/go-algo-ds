@@ -1,9 +1,9 @@
 package sort
 
-//  Time complexity: O(n^2)
-// Space complexity: no additional
-
 // SelectionSort initiates a selection sort on the supplied int slice.
+//
+// Time complexity: O(n^2)
+// Space complexity: O(1)
 func SelectionSort(ints []int) {
 	size := len(ints)
 	for i := 0; i < size; i++ {

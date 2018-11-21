@@ -7,7 +7,7 @@ import (
 )
 
 func TestHeap(t *testing.T) {
-	i := randomUnsortedInts(1000, 99999)
+	var i = randomUnsortedInts(1000, 99999)
 
 	i = sort.HeapSort(i)
 

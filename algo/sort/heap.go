@@ -1,8 +1,9 @@
 package sort
 
 // HeapSort initiates a heap sort on the supplied int slice and returns a sorted int slice.
+//
 // Time complexity: O(n log(n))
-// Space complexity: no additional
+// Space complexity: O(1)
 func HeapSort(slice []int) []int {
 	h := buildMaxHeap(slice)
 

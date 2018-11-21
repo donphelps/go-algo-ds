@@ -1,11 +1,11 @@
 package sort
 
-//  Time complexity: Approximately O(n log^2(n)), depending on gapping method.
-// Space complexity: no additional
-
 var ciuraGaps = []int{1750, 701, 301, 132, 57, 23, 10, 4, 1}
 
 // ShellSort initiates a shell sort on the supplied int slice.
+//
+// Time complexity: Approximately O(n log^2(n)), depending on gapping method.
+// Space complexity: O(1)
 func ShellSort(ints []int) {
 	h := 1
 
