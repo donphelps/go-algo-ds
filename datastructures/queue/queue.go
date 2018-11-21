@@ -35,7 +35,7 @@ func (i *Queue) Enqueue(x int) {
 	i.elements = append(i.elements, x)
 }
 
-// Dequeue returns the next element in a queue and removes it.
+// Dequeue returns the next element and removes it from the queue.
 func (i *Queue) Dequeue() int {
 	r := i.Peek()
 	i.elements = append(i.elements[:0], i.elements[1:]...)
@@ -43,7 +43,7 @@ func (i *Queue) Dequeue() int {
 	return r
 }
 
-// Contains checks if the element is in a queue.
+// Contains checks if the element is in the queue.
 func (i *Queue) Contains(x int) bool {
 	for _, e := range i.elements {
 		if e == x {

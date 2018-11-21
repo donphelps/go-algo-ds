@@ -30,7 +30,7 @@ func (s *Stack) Peek() int {
 	return s.elements[len(s.elements)-1]
 }
 
-// Pop returns the next element in the stack and removes it.
+// Pop returns the next element and removes it from the stack.
 func (s *Stack) Pop() int {
 	r := s.elements[len(s.elements)-1]
 	s.elements = s.elements[0 : len(s.elements)-1]
@@ -53,7 +53,6 @@ func (s *Stack) Contains(x int) bool {
 	return false
 }
 
-// String returns a stack represented as a string.
 func (s *Stack) String() string {
 	var buffer bytes.Buffer
 

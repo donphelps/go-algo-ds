@@ -18,16 +18,16 @@ type DoubleLinkedList struct {
 	Tail *DoubleNode
 }
 
-// NewDoubleNode returns a DoubleNode with the supplied int value. O(1).
-func NewDoubleNode(v int) *DoubleNode {
+// NewDoubleNode returns a DoubleNode with the supplied int value.
+func NewDoubleNode(value int) *DoubleNode {
 	return &DoubleNode{
-		v,
+		value,
 		nil,
 		nil,
 	}
 }
 
-// Insert an integer as the last item in the list. O(1).
+// Insert an integer as the last item in the list.
 func (d *DoubleLinkedList) Insert(i int) {
 	n := NewDoubleNode(i)
 
@@ -42,7 +42,7 @@ func (d *DoubleLinkedList) Insert(i int) {
 	d.Tail = n
 }
 
-// InsertHead inserts an integer as the first item in the list. O(1).
+// InsertHead inserts an integer as the first item in the list.
 func (d *DoubleLinkedList) InsertHead(i int) {
 	n := NewDoubleNode(i)
 
@@ -56,7 +56,7 @@ func (d *DoubleLinkedList) InsertHead(i int) {
 	d.Head = n
 }
 
-// Search searches for the integer and return a pointer to the node. O(n).
+// Search searches for the integer and return a pointer to the node.
 func (d *DoubleLinkedList) Search(i int) *DoubleNode {
 	current := d.Head
 	for current != nil && current.Value != i {
@@ -66,7 +66,7 @@ func (d *DoubleLinkedList) Search(i int) *DoubleNode {
 	return current
 }
 
-// SearchReverse searches for the integer starting from the end of the list and return a pointer to the node. O(n).
+// SearchReverse searches for the integer starting from the end of the list and return a pointer to the node.
 func (d *DoubleLinkedList) SearchReverse(i int) *DoubleNode {
 	if d.Head == nil || d.Tail == nil {
 		return nil
@@ -80,7 +80,7 @@ func (d *DoubleLinkedList) SearchReverse(i int) *DoubleNode {
 	return current
 }
 
-// Delete the first instance of an integer from the list. O(n).
+// Delete the first instance of an integer from the list.
 func (d *DoubleLinkedList) Delete(i int) {
 	current := d.Head
 	var last *DoubleNode
@@ -99,13 +99,13 @@ func (d *DoubleLinkedList) Delete(i int) {
 	}
 }
 
-// Clear the list of all entries. O(1).
+// Clear the list of all entries.
 func (d *DoubleLinkedList) Clear() {
 	d.Head = nil
 	d.Tail = nil
 }
 
-// Count returns the number of elements in the list. O(n).
+// Count returns the number of elements in the list.
 func (d *DoubleLinkedList) Count() int {
 	r := 0
 	current := d.Head

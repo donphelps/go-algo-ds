@@ -17,15 +17,15 @@ type SingleLinkedList struct {
 	Tail *SingleNode
 }
 
-// NewSingleNode returns a SingleNode with the supplied int value. O(1).
-func NewSingleNode(v int) SingleNode {
+// NewSingleNode returns a SingleNode with the supplied int value.
+func NewSingleNode(value int) SingleNode {
 	return SingleNode{
-		v,
+		value,
 		nil,
 	}
 }
 
-// Insert an integer as the last item in the list. O(1).
+// Insert an integer as the last item in the list.
 func (s *SingleLinkedList) Insert(i int) {
 	n := NewSingleNode(i)
 
@@ -39,7 +39,7 @@ func (s *SingleLinkedList) Insert(i int) {
 	s.Tail = &n
 }
 
-// InsertHead inserts an integer as the first item in the list. O(1).
+// InsertHead inserts an integer as the first item in the list.
 func (s *SingleLinkedList) InsertHead(i int) {
 	n := NewSingleNode(i)
 
@@ -53,7 +53,7 @@ func (s *SingleLinkedList) InsertHead(i int) {
 	s.Head = &n
 }
 
-// Search for the integer and return a pointer to the node. O(n).
+// Search for the integer and return a pointer to the node.
 func (s *SingleLinkedList) Search(i int) *SingleNode {
 	current := s.Head
 	for current != nil && current.Value != i {
@@ -63,17 +63,17 @@ func (s *SingleLinkedList) Search(i int) *SingleNode {
 	return current
 }
 
-// Delete the first instance of an integer from the list. O(n).
+// Delete the first instance of an integer from the list.
 func (s *SingleLinkedList) Delete(i int) {
 	current := s.Head
 	var last *SingleNode
 
-	if current != nil && current.Value == i { // head matches, Next is new Head
+	if current != nil && current.Value == i {
 		s.Head = current.Next
 		return
 	}
 
-	for current != nil && current.Value != i { // iterate through until match
+	for current != nil && current.Value != i {
 		last = current
 		current = current.Next
 	}
@@ -83,13 +83,13 @@ func (s *SingleLinkedList) Delete(i int) {
 	}
 }
 
-// Clear the list of all entries. O(1).
+// Clear the list of all entries.
 func (s *SingleLinkedList) Clear() {
 	s.Head = nil
 	s.Tail = nil
 }
 
-// Count returns the number of elements in the list. O(n).
+// Count returns the number of elements in the list.
 func (s *SingleLinkedList) Count() int {
 	r := 0
 	current := s.Head
