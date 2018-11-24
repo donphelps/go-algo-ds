@@ -4,45 +4,51 @@ import (
 	"fmt"
 	"go-algo-ds/algo/sort"
 	"math/rand"
+	"runtime"
 	"time"
 
 	"golang.org/x/text/message"
 )
 
-/*
-[] Redo all comments
-[] Rename parameters
-[] What sorts to implement?
+var sampleQty = 10000000
+var sampleIntMax = 10000
+var sample []int
 
-[] do all functions have their computational cost noted?
-
-[] make sure all big-O's are accurate.
-*/
-
-var sampleQty = 1000000
-var sampleSize = 9999
+func init() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+}
 
 func main() {
 	fmt.Println()
 	defer fmt.Println()
 
-	testSorts(sampleQty)
+	/*originalSample := newSample(sampleQty, sampleIntMax)
+	sample := []int{}
+	for i := 10; i <= 1000; i += 10 {
+		sample = copySample(originalSample)
+		start := time.Now()
+		sort.MergeSortMulti(sample, i)
+		elapsed := time.Since(start)
+		log.Printf("%v %v\n", i, elapsed)
+	}*/
+
+	benchmarkSorts(sampleQty, sampleIntMax)
 }
 
-func testSorts(qty int) {
-	fmt.Printf("Sample contains %v integer elements ranging in values +/- %v\n", formatInt(sampleQty), formatInt(sampleSize))
+func benchmarkSorts(qty, max int) {
+	fmt.Printf("Sample contains %v integer elements ranging in values +/- %v\n", formatInt(qty), formatInt(max))
 
 	start := time.Now()
-	b := randomUnsortedInts(qty)
-	/*o := append([]int(nil), b...)
-	s := append([]int(nil), b...)
-	i := append([]int(nil), b...)*/
-	h := append([]int(nil), b...)
-	m := append([]int(nil), b...)
-	mm := append([]int(nil), b...)
-	sh := append([]int(nil), b...)
-	sho := append([]int(nil), b...)
-	q := append([]int(nil), b...)
+	b := newSample(qty, max)
+	//o := copySample(b)
+	//s := copySample(b)
+	//i := copySample(b)
+	h := copySample(b)
+	m := copySample(b)
+	mm := copySample(b)
+	sh := copySample(b)
+	sho := copySample(b)
+	q := copySample(b)
 	elapsed := time.Since(start)
 	fmt.Printf("Samples generated in %v\n\n", elapsed)
 
@@ -53,64 +59,68 @@ func testSorts(qty int) {
 	sort.BubbleSort(b)
 	elapsed = time.Since(start)
 	fmt.Printf("  bubble complete in %v\n", elapsed)
-	// ------------
+
 	start = time.Now()
 	sort.BubbleSortOptimized(o)
 	elapsed = time.Since(start)
 	fmt.Printf("  bubble opt complete in %v\n", elapsed)
-	// ------------
+
 	start = time.Now()
 	sort.SelectionSort(s)
 	elapsed = time.Since(start)
 	fmt.Printf("  selection complete in %v\n", elapsed)
-	// ------------
+
 	start = time.Now()
 	sort.InsertionSort(i)
 	elapsed = time.Since(start)
 	fmt.Printf("  insertion complete in %v\n", elapsed)*/
-	// ------------
+
 	fmt.Println("O(n log(n)):")
 	start = time.Now()
 	h = sort.HeapSort(h)
 	elapsed = time.Since(start)
 	fmt.Printf("  heap complete in %v\n", elapsed)
-	// ------------
+
 	start = time.Now()
 	m = sort.MergeSort(m)
 	elapsed = time.Since(start)
 	fmt.Printf("  merge complete in %v\n", elapsed)
-	// ------------
+
 	start = time.Now()
-	mm = sort.MergeSortMulti(mm)
+	mm = sort.MergeSortMulti(mm, 100)
 	elapsed = time.Since(start)
 	fmt.Printf("  goroutine merge complete in %v\n", elapsed)
-	// ------------
+
 	start = time.Now()
 	sort.ShellSort(sh)
 	elapsed = time.Since(start)
 	fmt.Printf("  shell complete in %v\n", elapsed)
-	// ------------
+
 	start = time.Now()
 	sort.ShellSortCiura(sho)
 	elapsed = time.Since(start)
 	fmt.Printf("  shell optimized complete in %v\n", elapsed)
-	// ------------
+
 	start = time.Now()
 	q = sort.QuickSort(q)
 	elapsed = time.Since(start)
 	fmt.Printf("  quick complete in %v\n", elapsed)
 }
 
-func randomUnsortedInts(count int) []int {
-	slice := make([]int, count, count)
+func newSample(qty, max int) []int {
+	sample := make([]int, qty, qty)
 
 	rand.Seed(time.Now().UnixNano())
 
-	for i := 0; i < count; i++ {
-		slice[i] = rand.Intn(sampleSize) - rand.Intn(sampleSize)
+	for i := 0; i < qty; i++ {
+		sample[i] = rand.Intn(max) - rand.Intn(max)
 	}
 
-	return slice
+	return sample
+}
+
+func copySample(sample []int) []int {
+	return append([]int(nil), sample...)
 }
 
 func formatInt(x int) string {
