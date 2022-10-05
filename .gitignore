@@ -13,6 +13,7 @@
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
 
+vendor/
 .vscode
 go-algo-ds
 go-algo-ds.exe
