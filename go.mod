@@ -1,5 +1,5 @@
 module github.com/donphelps/go-algo-ds
 
-go 1.18
+go 1.23.5
 
-require golang.org/x/text v0.3.7
+require golang.org/x/text v0.21.0
