@@ -1,15 +1,17 @@
-package sort_test
+package shell_test
 
 import (
-	"go-algo-ds/algo/sort"
 	gosort "sort"
 	"testing"
+
+	"github.com/donphelps/go-algo-ds/algo/sort/shell"
+	"github.com/donphelps/go-algo-ds/algo/sort/testdata"
 )
 
 func TestShellSort(t *testing.T) {
-	var i = randomUnsortedInts(1000, 99999)
+	var i = testdata.RandomUnsortedInts(1000, 99999)
 
-	sort.ShellSort(i)
+	shell.Sort(i)
 
 	if !gosort.IntsAreSorted(i) {
 		t.Errorf("ShellSort result is not sorted. %v", i)
@@ -17,9 +19,9 @@ func TestShellSort(t *testing.T) {
 }
 
 func TestShellSortCiura(t *testing.T) {
-	var i = randomUnsortedInts(1000, 99999)
+	var i = testdata.RandomUnsortedInts(1000, 99999)
 
-	sort.ShellSortCiura(i)
+	shell.SortCiura(i)
 
 	if !gosort.IntsAreSorted(i) {
 		t.Errorf("ShellSort result is not sorted. %v", i)

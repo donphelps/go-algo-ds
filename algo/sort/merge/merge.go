@@ -1,4 +1,4 @@
-package sort
+package merge
 
 import "sync"
 
@@ -18,7 +18,7 @@ func MergeSort(ints []int) []int {
 
 func merge(left, right []int) []int {
 	size, leftIndex, rightIndex := len(left)+len(right), 0, 0
-	merged := make([]int, size, size)
+	merged := make([]int, size)
 
 	for i := 0; i < size; i++ {
 		if leftIndex > len(left)-1 && rightIndex <= len(right)-1 { // left is done, right is not.
@@ -39,16 +39,23 @@ func merge(left, right []int) []int {
 	return merged
 }
 
-var sem chan struct{}
+type Merge struct {
+	sem chan struct{}
+}
+
+func New(maxGoRoutines int) *Merge {
+	m := Merge{}
+	m.sem = make(chan struct{}, maxGoRoutines)
+	return &m
+}
 
 // MergeSortMulti uses goroutines to initiates a merge sort on the supplied slice and returns a sorted int slice.
 // From https://medium.com/@_orcaman/when-too-much-concurrency-slows-you-down-golang-9c144ca305a
-func MergeSortMulti(ints []int, numGoRoutines int) []int {
-	sem = make(chan struct{}, numGoRoutines)
-	return mergeSortMulti(ints)
+func (m *Merge) MergeSortMulti(ints []int) []int {
+	return m.mergeSortMulti(ints)
 }
 
-func mergeSortMulti(ints []int) []int {
+func (m *Merge) mergeSortMulti(ints []int) []int {
 	if len(ints) <= 1 {
 		return ints
 	}
@@ -62,10 +69,10 @@ func mergeSortMulti(ints []int) []int {
 	var r []int
 
 	select {
-	case sem <- struct{}{}:
+	case m.sem <- struct{}{}:
 		go func() {
-			l = mergeSortMulti(ints[:n])
-			<-sem
+			l = m.mergeSortMulti(ints[:n])
+			<-m.sem
 			wg.Done()
 		}()
 	default:
@@ -74,10 +81,10 @@ func mergeSortMulti(ints []int) []int {
 	}
 
 	select {
-	case sem <- struct{}{}:
+	case m.sem <- struct{}{}:
 		go func() {
-			r = mergeSortMulti(ints[n:])
-			<-sem
+			r = m.mergeSortMulti(ints[n:])
+			<-m.sem
 			wg.Done()
 		}()
 	default:

@@ -1,10 +1,10 @@
-package sort
+package bubble
 
-// BubbleSort initiates a bubble sort on the supplied int slice.
+// Sort initiates a bubble sort on the supplied int slice.
 //
 // Time complexity: O(n^2)
 // Space complexity: O(1)
-func BubbleSort(ints []int) {
+func Sort(ints []int) {
 	var size = len(ints)
 
 	for i := 0; i < size; i++ {
@@ -20,8 +20,8 @@ func BubbleSort(ints []int) {
 	}
 }
 
-// BubbleSortOptimized initiates an optimized bubble sort on the supplied int slice. It will skip comparison on numbers already sorted as well as stop when list is sorted.
-func BubbleSortOptimized(ints []int) {
+// SortOptimized initiates an optimized bubble sort on the supplied int slice. It will skip comparison on numbers already sorted as well as stop when list is sorted.
+func SortOptimized(ints []int) {
 	var size = len(ints)
 	for i := 0; i < size; i++ {
 		if !bubblepass(ints, i) {

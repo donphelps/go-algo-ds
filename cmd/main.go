@@ -2,17 +2,21 @@ package main
 
 import (
 	"fmt"
-	"go-algo-ds/algo/sort"
 	"math/rand"
 	"runtime"
 	"time"
 
+	"github.com/donphelps/go-algo-ds/algo/sort/heap"
+	"github.com/donphelps/go-algo-ds/algo/sort/merge"
+	"github.com/donphelps/go-algo-ds/algo/sort/quick"
+	"github.com/donphelps/go-algo-ds/algo/sort/shell"
+	"github.com/donphelps/go-algo-ds/datastructures/linkedlist"
 	"golang.org/x/text/message"
 )
 
-var sampleQty = 10000000
-var sampleIntMax = 10000
-var sample []int
+const sampleQty = 10000000
+const sampleIntMax = 10000
+const maxGoRoutines = 63
 
 func init() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
@@ -22,93 +26,92 @@ func main() {
 	fmt.Println()
 	defer fmt.Println()
 
-	/*originalSample := newSample(sampleQty, sampleIntMax)
-	sample := []int{}
-	for i := 10; i <= 1000; i += 10 {
-		sample = copySample(originalSample)
-		start := time.Now()
-		sort.MergeSortMulti(sample, i)
-		elapsed := time.Since(start)
-		log.Printf("%v %v\n", i, elapsed)
-	}*/
-
-	benchmarkSorts(sampleQty, sampleIntMax)
+	// linkedListDemo()
+	benchmarkSorts()
 }
 
-func benchmarkSorts(qty, max int) {
-	fmt.Printf("Sample contains %v integer elements ranging in values +/- %v\n", formatInt(qty), formatInt(max))
+func linkedListDemo() {
+	ll := linkedlist.New[int]()
+	ll.InsertFirst(0)
+	ll.InsertLast(1)
+	ll.InsertLast(2)
+
+	fmt.Printf("ll = %v\n\n", ll.String())
+}
+
+func benchmarkSorts() {
+	fmt.Printf("Sample contains %v integer elements ranging in values +/- %v\n", formatInt(sampleQty), formatInt(sampleIntMax))
 
 	start := time.Now()
-	b := newSample(qty, max)
-	//o := copySample(b)
-	//s := copySample(b)
-	//i := copySample(b)
+	b := newSample(sampleQty, sampleIntMax)
+	elapsed := time.Since(start)
+	fmt.Printf("Samples generated in %v\n", elapsed)
+	// o := copySample(b)
+	// s := copySample(b)
+	// i := copySample(b)
 	h := copySample(b)
 	m := copySample(b)
 	mm := copySample(b)
 	sh := copySample(b)
 	sho := copySample(b)
 	q := copySample(b)
-	elapsed := time.Since(start)
-	fmt.Printf("Samples generated in %v\n\n", elapsed)
-
-	// O(n^2) examples are too slow to bother with.
-
-	/*fmt.Println("O(n^2):")
-	start = time.Now()
-	sort.BubbleSort(b)
 	elapsed = time.Since(start)
-	fmt.Printf("  bubble complete in %v\n", elapsed)
+	fmt.Printf("Samples copied in %v\n\n", elapsed)
+
+	// start = time.Now()
+	// bubble.Sort(b)
+	// elapsed = time.Since(start)
+	// fmt.Printf("  bubble complete in %v\n", elapsed)
+
+	// start = time.Now()
+	// bubble.SortOptimized(o)
+	// elapsed = time.Since(start)
+	// fmt.Printf("  bubble opt complete in %v\n", elapsed)
+
+	// start = time.Now()
+	// selection.Sort(s)
+	// elapsed = time.Since(start)
+	// fmt.Printf("  selection complete in %v\n", elapsed)
+
+	// start = time.Now()
+	// insertion.Sort(i)
+	// elapsed = time.Since(start)
+	// fmt.Printf("  insertion complete in %v\n", elapsed)
 
 	start = time.Now()
-	sort.BubbleSortOptimized(o)
-	elapsed = time.Since(start)
-	fmt.Printf("  bubble opt complete in %v\n", elapsed)
-
-	start = time.Now()
-	sort.SelectionSort(s)
-	elapsed = time.Since(start)
-	fmt.Printf("  selection complete in %v\n", elapsed)
-
-	start = time.Now()
-	sort.InsertionSort(i)
-	elapsed = time.Since(start)
-	fmt.Printf("  insertion complete in %v\n", elapsed)*/
-
-	fmt.Println("O(n log(n)):")
-	start = time.Now()
-	h = sort.HeapSort(h)
+	_ = heap.Sort(h)
 	elapsed = time.Since(start)
 	fmt.Printf("  heap complete in %v\n", elapsed)
 
 	start = time.Now()
-	m = sort.MergeSort(m)
+	_ = merge.MergeSort(m)
 	elapsed = time.Since(start)
 	fmt.Printf("  merge complete in %v\n", elapsed)
 
 	start = time.Now()
-	mm = sort.MergeSortMulti(mm, 100)
+	merge := merge.New(maxGoRoutines)
+	_ = merge.MergeSortMulti(mm)
 	elapsed = time.Since(start)
 	fmt.Printf("  goroutine merge complete in %v\n", elapsed)
 
 	start = time.Now()
-	sort.ShellSort(sh)
+	shell.Sort(sh)
 	elapsed = time.Since(start)
 	fmt.Printf("  shell complete in %v\n", elapsed)
 
 	start = time.Now()
-	sort.ShellSortCiura(sho)
+	shell.SortCiura(sho)
 	elapsed = time.Since(start)
 	fmt.Printf("  shell optimized complete in %v\n", elapsed)
 
 	start = time.Now()
-	q = sort.QuickSort(q)
+	_ = quick.Sort(q)
 	elapsed = time.Since(start)
 	fmt.Printf("  quick complete in %v\n", elapsed)
 }
 
 func newSample(qty, max int) []int {
-	sample := make([]int, qty, qty)
+	sample := make([]int, qty)
 
 	rand.Seed(time.Now().UnixNano())
 

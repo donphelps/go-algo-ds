@@ -1,10 +1,10 @@
-package sort
+package heap
 
 // HeapSort initiates a heap sort on the supplied int slice and returns a sorted int slice.
 //
 // Time complexity: O(n log(n))
 // Space complexity: O(1)
-func HeapSort(slice []int) []int {
+func Sort(slice []int) []int {
 	h := buildMaxHeap(slice)
 
 	for i := len(h.slice) - 1; i >= 1; i-- {

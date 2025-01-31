@@ -1,13 +1,13 @@
-package sort
+package quick
 
 import "math/rand"
 
-// QuickSort initiates a quicksort on the supplied int slice and returns a sorted int slice.
+// Sort initiates a quicksort on the supplied int slice and returns a sorted int slice.
 // From https://gist.github.com/vderyagin/4161347
 //
 // Time complexity: O(n^2)
 // Space complexity: O(n)
-func QuickSort(slice []int) []int {
+func Sort(slice []int) []int {
 	length := len(slice)
 
 	if length <= 1 {
@@ -33,7 +33,7 @@ func QuickSort(slice []int) []int {
 		}
 	}
 
-	less, more = QuickSort(less), QuickSort(more)
+	less, more = Sort(less), Sort(more)
 
 	less = append(less, middle...)
 	less = append(less, more...)

@@ -1,8 +1,9 @@
 package queue_test
 
 import (
-	"go-algo-ds/datastructures/queue"
 	"testing"
+
+	"github.com/donphelps/go-algo-ds/datastructures/queue"
 )
 
 func newTestQueue(length int) *queue.Queue {

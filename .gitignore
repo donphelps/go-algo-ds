@@ -17,3 +17,6 @@ vendor/
 .vscode
 go-algo-ds
 go-algo-ds.exe
+
+# macos
+.DS_Store

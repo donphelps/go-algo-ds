@@ -1,15 +1,17 @@
-package sort_test
+package merge_test
 
 import (
-	"go-algo-ds/algo/sort"
 	gosort "sort"
 	"testing"
+
+	"github.com/donphelps/go-algo-ds/algo/sort/merge"
+	"github.com/donphelps/go-algo-ds/algo/sort/testdata"
 )
 
 func TestMergeSort(t *testing.T) {
-	var i = randomUnsortedInts(1000, 99999)
+	i := testdata.RandomUnsortedInts(1000, 99999)
 
-	sorted := sort.MergeSort(i)
+	sorted := merge.MergeSort(i)
 
 	if !gosort.IntsAreSorted(sorted) {
 		t.Errorf("MergeSort result is not sorted. %v", i)
@@ -17,9 +19,10 @@ func TestMergeSort(t *testing.T) {
 }
 
 func TestMergeSortMulti(t *testing.T) {
-	var i = randomUnsortedInts(1000, 99999)
+	var i = testdata.RandomUnsortedInts(1000, 99999)
 
-	sorted := sort.MergeSortMulti(i, 64)
+	m := merge.New(63)
+	sorted := m.MergeSortMulti(i)
 
 	if !gosort.IntsAreSorted(sorted) {
 		t.Errorf("MergeSort result is not sorted. %v", i)

@@ -1,12 +1,11 @@
-package sort_test
+package testdata
 
 import (
 	"math/rand"
 	"time"
 )
 
-// [] delete me in favor of testdata
-func randomUnsortedInts(count, max int) []int {
+func RandomUnsortedInts(count, max int) []int {
 	slice := make([]int, count)
 
 	rand.Seed(time.Now().UnixNano())
